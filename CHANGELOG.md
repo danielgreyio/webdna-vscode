@@ -1,5 +1,10 @@
 # WebDNA Language Extension for VSCode Changelog
 
+## Unreleased:
+- Added/updated support for the highlighting of:
+    * Contexts: lowercase, uppercase
+    * Support parameters for tags: lowercase, uppercase (charset)
+
 ## (03/20/2022) v-0.1.2:
 - Updated Readme Information
 - Added/updated support for the highlighting of:

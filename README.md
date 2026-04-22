@@ -104,7 +104,7 @@ Syntax Highlighting for WebDNA consists of a few components that each tag has: t
 | ListWords             | ✓        | ✓        | ✓        |
 | Lookup                | ✓        | ✗        | N/A       |
 | Loop                  | ✗        | ✗        | ✗        |
-| LowerCase             | ✗        | ✗        | ✗        |
+| LowerCase             | ✓        | ✓        | ✓        |
 | Math                  | ✓        | ✓        | ✗        |
 | Middle                | ✗        | ✗        | ✗        |
 | MoveFile              | ✓        | ✓        | N/A       |
@@ -173,7 +173,7 @@ Syntax Highlighting for WebDNA consists of a few components that each tag has: t
 | Time                  | ✓        | ✓        | N/A      |
 | UnURL                 | ✓        | N/A       | ✓        |
 | URL                   | ✓        | N/A       | ✓        |
-| Uppercase             | ✗        | ✗        | ✗        |
+| Uppercase             | ✓        | ✓        | ✓        |
 | UserName              | ✓        | N/A       | N/A      |
 | ValidCard             | ✓        | ✓        | N/A      |
 | Version               | ✓        | N/A       | N/A      |
