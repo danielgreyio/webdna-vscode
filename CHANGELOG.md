@@ -2,8 +2,8 @@
 
 ## Unreleased:
 - Added/updated support for the highlighting of:
-    * Contexts: lowercase, uppercase
-    * Support parameters for tags: lowercase, uppercase (charset)
+    * Contexts: getchars, lowercase, uppercase
+    * Support parameters for tags: getchars (start, end), lowercase, uppercase (charset)
 
 ## (02/13/2023) v-0.2.0:
 - Added/updated support for the highlighting of:
