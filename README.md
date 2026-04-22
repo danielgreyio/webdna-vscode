@@ -72,7 +72,7 @@ Syntax Highlighting for WebDNA consists of a few components that each tag has: t
 | FoundItems            | ✗        | ✗        | ✗        |
 | FreeMemory            | ✓        | N/A       | N/A      |
 | Function              | ✓        | ✓        | ✗        |
-| GetChars              | ✗        | ✗        | ✗        |
+| GetChars              | ✓        | ✓        | ✓        |
 | GetCookie             | ✓        | ✓        | N/A      |
 | GetMIMEHeader         | ✓        | ✓        | N/A      |
 | Grep                  | ✗        | ✗        | ✗        |

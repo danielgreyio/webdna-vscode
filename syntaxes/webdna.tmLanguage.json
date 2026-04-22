@@ -1847,6 +1847,95 @@
 					}]
 				}]
 			},{
+				"comment": "WebDNA GetChars Context",
+				"begin": "(^[ \\t]+)?(?=\\[(?i:getchars)\\b(?!-))",
+				"beginCaptures": {
+					"1": {
+						"name": "punctuation.whitespace.embedded.leading.webdna"
+					}
+				},
+				"end": "(?!\\G)([ \\t]*$\\n?)?",
+				"endCaptures": {
+					"1": {
+						"name": "punctuation.whitespace.embedded.trailing.webdna"
+					}
+				},
+				"patterns": [{
+					"begin": "(\\[)((?i:getchars))\\b",
+					"beginCaptures": {
+						"0": {
+							"name": "meta.tag.metadata.getchars.start.webdna"
+						},
+						"1": {
+							"name": "punctuation.definition.tag.begin.webdna"
+						},
+						"2": {
+							"name": "entity.name.tag.webdna"
+						}
+					},
+					"end": "(/)((?i:getchars))(\\])",
+					"endCaptures": {
+						"0": {
+							"name": "meta.tag.metadata.getchars.end.webdna"
+						},
+						"1": {
+							"name": "punctuation.definition.tag.begin.webdna"
+						},
+						"2": {
+							"name": "entity.name.tag.webdna"
+						},
+						"3": {
+							"name": "punctuation.definition.tag.end.webdna"
+						}
+					},
+					"patterns": [{
+						"begin": "\\G",
+						"end": "(?=/)",
+						"patterns": [{
+							"begin": "(\\s|&)(?i:(start|end))(?![\\w:-])",
+							"beginCaptures": {
+								"1": {
+									"name": "variable.parameter.and.webdna"
+								},
+								"2": {
+									"name": "variable.parameter.webdna"
+								}
+							},
+							"comment": "WebDNA parameters",
+							"end": "(?=\\s*+[^=\\s])",
+							"name": "meta.parameter.$2.webdna",
+							"patterns": [
+								{ "include": "#parameter-interior" }
+							]
+						},{
+							"include": "#webdna"
+						},{
+							"begin": "(\\])",
+							"name": "meta.embedded.context.getchars.webdna",
+							"beginCaptures": {
+								"0": {
+									"name": "meta.tag.metadata.getchars.start.webdna"
+								},
+								"1": {
+									"name": "punctuation.definition.tag.end.webdna"
+								}
+							},
+							"end": "((\\[))(?=/(?i:getchars))",
+							"endCaptures": {
+								"0": {
+									"name": "meta.tag.metadata.getchars.end.webdna"
+								},
+								"1": {
+									"name": "punctuation.definition.tag.begin.webdna"
+								}
+							},
+							"patterns": [{
+								"include": "#webdna"
+							}]
+						}]
+					}]
+				}]
+			},{
 				"comment": "WebDNA ListChars Context",
 				"begin": "(^[ \\t]+)?(?=\\[(?i:listchars)\\b(?!-))",
 				"beginCaptures": {
