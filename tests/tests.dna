@@ -334,6 +334,12 @@ else return "it's less that 50!"[/AppleScript]
 [!] ==== [/!]
 [!] Grep [/!]
 [!] ==== [/!]
+[grep search=Mozilla][browsername][/grep]
+[grep search=[0-9]+]There are 42 apples and 7 oranges[/grep]
+[grep search=([^0-9])&replace=][interpret][meetREPPINGCATS[index]][/interpret][/grep]
+
+[!] This Should Not Highlight As They Are Outside the Context! [/!]
+[search]
 
 [!] ==== [/!]
 [!] Hide [/!]

@@ -64,6 +64,95 @@
 
 		"contexts-valid": {
 			"patterns": [{
+				"comment": "WebDNA Grep Context",
+				"begin": "(^[ \\t]+)?(?=\\[(?i:grep)\\b(?!-))",
+				"beginCaptures": {
+					"1": {
+						"name": "punctuation.whitespace.embedded.leading.webdna"
+					}
+				},
+				"end": "(?!\\G)([ \\t]*$\\n?)?",
+				"endCaptures": {
+					"1": {
+						"name": "punctuation.whitespace.embedded.trailing.webdna"
+					}
+				},
+				"patterns": [{
+					"begin": "(\\[)((?i:grep))\\b",
+					"beginCaptures": {
+						"0": {
+							"name": "meta.tag.metadata.grep.start.webdna"
+						},
+						"1": {
+							"name": "punctuation.definition.tag.begin.webdna"
+						},
+						"2": {
+							"name": "entity.name.tag.webdna"
+						}
+					},
+					"end": "(/)((?i:grep))(\\])",
+					"endCaptures": {
+						"0": {
+							"name": "meta.tag.metadata.grep.end.webdna"
+						},
+						"1": {
+							"name": "punctuation.definition.tag.begin.webdna"
+						},
+						"2": {
+							"name": "entity.name.tag.webdna"
+						},
+						"3": {
+							"name": "punctuation.definition.tag.end.webdna"
+						}
+					},
+					"patterns": [{
+						"begin": "\\G",
+						"end": "(?=/)",
+						"patterns": [{
+							"begin": "(\\s|&)(?i:(search|replace))(?![\\w:-])",
+							"beginCaptures": {
+								"1": {
+									"name": "variable.parameter.and.webdna"
+								},
+								"2": {
+									"name": "variable.parameter.webdna"
+								}
+							},
+							"comment": "WebDNA parameters",
+							"end": "(?=\\s*+[^=\\s])",
+							"name": "meta.parameter.$2.webdna",
+							"patterns": [
+								{ "include": "#parameter-interior" }
+							]
+						},{
+							"include": "#webdna"
+						},{
+							"begin": "(\\])",
+							"name": "meta.embedded.context.grep.webdna",
+							"beginCaptures": {
+								"0": {
+									"name": "meta.tag.metadata.grep.start.webdna"
+								},
+								"1": {
+									"name": "punctuation.definition.tag.end.webdna"
+								}
+							},
+							"end": "((\\[))(?=/(?i:grep))",
+							"endCaptures": {
+								"0": {
+									"name": "meta.tag.metadata.grep.end.webdna"
+								},
+								"1": {
+									"name": "punctuation.definition.tag.begin.webdna"
+								}
+							},
+							"patterns": [{
+								"include": "#webdna"
+							}]
+						}]
+					}]
+				}]
+			},{
 				"comment": "WebDNA AppendFile Context",
 				"begin": "(^[ \\t]+)?(?=\\[(?i:appendfile)\\b(?!-))",
 				"beginCaptures": {
