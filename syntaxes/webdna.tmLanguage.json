@@ -3582,7 +3582,7 @@
 						"name": "punctuation.separator.key-value.webdna"
 					}
 				},
-				"end": "(?<=[^\\s=])(?=&|\\])",
+				"end": "(?=&|\\])",
 				"patterns": [
 					{ "include": "#webdna" }
 				]
@@ -4206,7 +4206,7 @@
 										"name": "punctuation.separator.key-value.webdna"
 									}
 								},
-								"end": "(?<=[^\\s=])(?=&|\\])",
+								"end": "(?=&|\\])",
 								"patterns": [
 									{ "include": "#webdna" },								
 									{ "include": "source.sql" }	
@@ -4311,6 +4311,63 @@
 							"include": "#webdna"
 						}
 					]
+				},
+				{
+					"comment": "WebDNA database manipulation contexts (open tag)",
+					"begin": "(?i)(\\[)\\b(append|replace|search|grep)\\b(?=\\s|\\])",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.tag.begin.webdna"
+						},
+						"2": {
+							"name": "support.function.webdna"
+						}
+					},
+					"end": "\\]",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.tag.end.webdna"
+						}
+					},
+					"patterns": [
+						{
+							"begin": "(?i)(\\s|&)([\\w]+)(?=\\=)",
+							"beginCaptures": {
+								"1": {
+									"name": "variable.parameter.and.webdna"
+								},
+								"2": {
+									"name": "variable.parameter.webdna"
+								}
+							},
+							"comment": "WebDNA parameters",
+							"end": "(?=\\s*+[^=\\s])",
+							"name": "meta.parameter.$2.webdna",
+							"patterns": [
+								{ "include": "#parameter-interior" }
+							]
+						},{
+							"include": "#webdna"
+						}
+					]
+				},
+				{
+					"comment": "WebDNA database manipulation contexts (close tag)",
+					"begin": "(?i)(\\[/)\\b(append|replace|search|grep)\\b(?=\\])",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.tag.begin.webdna"
+						},
+						"2": {
+							"name": "support.function.webdna"
+						}
+					},
+					"end": "\\]",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.tag.end.webdna"
+						}
+					}
 				},
 				{
 					"begin": "(?i)(\\[)([^ ]*?)(?=\\])",

@@ -2,7 +2,7 @@
 [!] Comment Blocks [/!]
 [!] ============== [/!]
 [!]
-    Any Text to be Hidden 
+    Any Text to be Hidden
     This text will be hidden from web visitors
     With WebDNA [thisurl] and [thisurlplusget]
 [/!]
@@ -28,6 +28,39 @@ Tela00001031[test]
 [!] ====== [/!]
 [!] Append [/!]
 [!] ====== [/!]
+[append db=/data/db_vlbookings/vlbookings.db][!]
+  [/!]&rID=[url][varBOOKINGID][/url][!]
+  [/!]&rCREATETSTAMP=[url][varTIMESTAMP][/url][!]
+  [/!]&rMODTSTAMP=[url][varTIMESTAMP][/url][!]
+  [/!]&rPUBLISHTSTAMP=[url][varTIMESTAMP][/url][!]
+  [/!]&rCREATEUSER=[url][varCREATEUSER][/url][!]
+  [/!]&rMODUSER=[url][varCREATEUSER][/url][!]
+  [/!][switch value=[newVENDOR]][!]
+    [/!][case value=1]&rSTATUS=2[/case][!] <----  NEW VENDOR (DRAFT)
+    [/!][default]&rSTATUS=1[/default][!]   <----  EXISTING VENDOR (LIVE)
+  [/!][/switch][!]
+  [/!]&rARCHIVETSTAMP=[url]4102444799[/url][!]
+  -- booking data --
+  [/!]&sBOOKINGTYPE=[url][varPURPOSELIST][/url][!]
+  [/!]&dBOOKINGDATE=[url][varBOOKINGDATE][/url][!]
+  [/!]&sBOOKINGTIME=[url][varBOOKINGTIME][/url][!]
+  [/!]&sBOOKINGSTATUS=2[!]  <-- 2 = approved
+  [/!]&dBOOKINGSTATUSDATE=[url][varTIMESTAMP][/url][!]
+  [/!]&sCLIENTID=[url][varCLIENTID][/url][!]
+  [/!]&sCLIENTTYPE=[url][grep search=([^a-zA-Z0-9])&replace=][_sCLIENTTYPE][/grep][/url][!]
+  [/!]&sCLIENTNAME=[url][varCLIENTNAME][/url][!]
+  [/!]&sREPID=[url][varREPID][/url][!]
+  [/!]&sREPTYPE=[!]
+  [/!]&sREPNAME=[url][varREPNAME][/url][!]
+  [/!]&sREPORGID=[url][varREPORGID][/url][!]
+  [/!]&sREPORGTYPE=[url][varREPORGTYPE][/url][!]
+  [/!]&sREPORGNAME=[url][varREPORGNAME][/url][!]
+  [/!]&sACCEPTEDBYID=direct-entry[!]
+  [/!]&sACCEPTEDBYTYPE=[!]
+  [/!]&sACCEPTEDBYNAME=[!]
+  [/!]&sCURRENTSTATUS=[url][varSTATUSID][/url][!]
+  [/!]&sMEETINGID=[url][varLINKID][/url][!]
+[/!][/append]
 
 [!] ========== [/!]
 [!] AppendFile [/!]
@@ -468,7 +501,7 @@ else return "it's less that 50!"[/AppleScript]
 [index]: [char]
 [/ListChars]
 
-[listchars chars=1234567890.abcdefg&start=4&end=10&from=end] 
+[listchars chars=1234567890.abcdefg&start=4&end=10&from=end]
 Character at string position [position] = '[char]'
 [/listchars]
 
@@ -521,7 +554,7 @@ width: [width]
 [ListFiles path=../WebCatalog/]
 File Name: [FileName]
 Modified: [ModDate]
-Size: [Size] 
+Size: [Size]
 [IsFolder] [IsFile] [FileName] [FullPath] [ModDate] [ModTime] [CreateDate] [CreateTime] [Size] [Index] [StartPath]
 [/ListFiles]
 
@@ -873,7 +906,7 @@ Found [NumFound] items<br>
 [!] ========== [/!]
 [!] SQLConnect [/!]
 [!] ========== [/!]
-[SQLConnect dbType=My[hello]SQL&host=192.168.1.1&database=SMSITest&uid=sa&pwd=pass&conn_var=conn1&var=conn1] 
+[SQLConnect dbType=My[hello]SQL&host=192.168.1.1&database=SMSITest&uid=sa&pwd=pass&conn_var=conn1&var=conn1]
     [SQL_HOST] - [SQL_SERVERTYPE] - [SQL_SERVERVER] - [SQL_CLIENTVER] - [SQL_DBNAME]
     <table>
         <tr><td>Host:</td><td>[SQL_HOST]</td></tr>
@@ -1123,10 +1156,3 @@ SELECT firstName,lastName FROM employees WHERE [hello] = '23';
 
 [/founditems]
 [/search]
-
-
-
-
-
-
-
