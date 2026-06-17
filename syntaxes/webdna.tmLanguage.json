@@ -10,20 +10,6 @@
 			"include": "text.html.derivative"
 		}
 	],
-	"injections": {
-		"L:meta.tag": {
-			"comment": "Recognise WebDNA tags inside HTML element tags (e.g. [showif]...[/showif] used as/within attributes). Without this the embedded HTML grammar swallows the whole <tag ...> and mis-flags WebDNA closing tags as invalid. #strings is intentionally excluded so HTML attribute quoting stays intact.",
-			"patterns": [
-				{ "include": "#comments" },
-				{ "include": "#keywords" },
-				{ "include": "#storage" },
-				{ "include": "#support" },
-				{ "include": "#sql" },
-				{ "include": "#contexts-valid" },
-				{ "include": "#tags-valid" }
-			]
-		}
-	},
 	"repository": {
 		"webdna": {
 			"patterns": [
