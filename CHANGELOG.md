@@ -1,5 +1,8 @@
 # WebDNA Language Extension for VSCode Changelog
 
+## (06/17/2026) v-0.1.3:
+- Fixed a grammar injection that bled scope across the document, mis-colouring code after WebDNA blocks embedded in multi-line HTML attribute values.
+
 ## (03/20/2022) v-0.1.2:
 - Updated Readme Information
 - Added/updated support for the highlighting of:

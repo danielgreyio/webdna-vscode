@@ -1,5 +1,8 @@
 node_modules
 
+# Packaged extension build artifacts
+*.vsix
+
 # Never commit private test fixtures — may contain proprietary data
 tests/privatetest.dna
 privatetest.dna
