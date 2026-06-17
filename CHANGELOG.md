@@ -1,5 +1,10 @@
 # WebDNA Language Extension for VSCode Changelog
 
+## (06/17/2026) v-0.1.5:
+- WebDNA embedded in an HTML attribute value (e.g. a multi-line `value="[interpret]...[!]...[/!][search ...]...[listwords ...]..."`) is now tokenised as WebDNA instead of being coloured as a single HTML string. Comments, conditionals, database/loop contexts and variables now highlight, and the literal gaps are no longer left green. The region is bounded by the attribute's closing quote (and embedded comments are quote-bounded too) so it cannot bleed scope across the document.
+- WebDNA tags written directly inside an HTML element tag (e.g. `<option [showif [x]=[y]]selected[/showif]>`) continue to highlight, while plain non-WebDNA attributes (`class="..."`) keep their normal string colouring.
+- Nested field references such as `[meetREPPINGCATS[index]]` now highlight the inner subscript tag (`[index]`) as a variable, at any nesting depth. Flat tags are unaffected.
+
 ## (06/17/2026) v-0.1.4:
 - Highlight WebDNA tags used inside HTML element tags (e.g. `<option [showif [x]=[y]]selected[/showif]>`), which were previously mis-flagged by the HTML grammar as invalid attributes (italic/red). Implemented as a scoped injection limited to single-tag, bracket-balanced rules so it cannot bleed scope across the document.
 

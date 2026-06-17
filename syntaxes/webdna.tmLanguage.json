@@ -11,9 +11,10 @@
 		}
 	],
 	"injections": {
-		"L:meta.tag": {
-			"comment": "Highlight WebDNA tags used inside HTML element tags, e.g. <option [showif [x]=[y]]selected[/showif]>. Only single-tag, bracket-balanced rules (end=]) are injected: conditionals (showif/hideif/if/case/switch/else/then), database/generic tags, and support functions. Content-wrapping rules (#comments [!]..[/!], #storage [text]/[math]/[function], #contexts-valid, #sql, and the loop/flow wrappers like listwords/formvariables) are deliberately excluded — those span content and bled scope to end-of-document when injected (see prior revert in b1ec4e1/45090c6).",
+		"L:meta.tag - meta.embedded.webdna.attribute": {
+			"comment": "WebDNA used inside HTML element tags. (1) An attribute value that contains WebDNA (a [ before the closing quote) is tokenised whole as WebDNA via #embedded-webdna-attribute, so the html string scope no longer colours the literal gaps green; it is bounded by the closing quote so it cannot bleed past the attribute. (2) WebDNA written directly between attributes (e.g. <option [showif [x]=[y]]selected[/showif]>) is handled by the single-tag, bracket-balanced rules below. Content wrappers were previously injected unbounded and bled to end-of-document (revert b1ec4e1/45090c6); inside attribute values they are now safe because #embedded-webdna-attribute caps them at the quote.",
 			"patterns": [
+				{ "include": "#embedded-webdna-attribute" },
 				{ "include": "#keywords-conditional-valid" },
 				{ "include": "#tags-valid" },
 				{ "include": "#support" }
@@ -21,6 +22,50 @@
 		}
 	},
 	"repository": {
+		"embedded-webdna-attribute": {
+			"patterns": [
+				{
+					"comment": "Double-quoted HTML attribute value that contains WebDNA. The lookahead (?=[^\"]*\\[) only fires when a [ appears before the closing quote, so plain attributes (class=\"...\") keep their normal html string scope. The whole value is then tokenised as WebDNA and the rule ends at the closing quote, so it is bounded and cannot bleed past the attribute. Literal text inside is left unscoped (default foreground) rather than green string.",
+					"begin": "\"(?=[^\"]*\\[)",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.html"
+						}
+					},
+					"end": "\"",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.html"
+						}
+					},
+					"name": "meta.embedded.webdna.attribute.webdna",
+					"patterns": [
+						{ "include": "#comments-html-double" },
+						{ "include": "#webdna" }
+					]
+				},
+				{
+					"comment": "Single-quoted variant; bounded by the closing apostrophe.",
+					"begin": "'(?=[^']*\\[)",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.html"
+						}
+					},
+					"end": "'",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.html"
+						}
+					},
+					"name": "meta.embedded.webdna.attribute.webdna",
+					"patterns": [
+						{ "include": "#comments-html-single" },
+						{ "include": "#webdna" }
+					]
+				}
+			]
+		},
 		"webdna": {
 			"patterns": [
 				{ "include": "#comments" },
@@ -69,6 +114,46 @@
 			"name": "comment.block.webdna",
 			"patterns": [
 				{ "include": "#comments" }
+			]
+		},
+
+		"comments-html-double": {
+			"comment": "WebDNA [!]..[/!] comment, quote-bounded for use inside a double-quoted embedded-WebDNA attribute value. Identical to #comments except the end also matches (?=\") so an unterminated comment stops at the attribute's closing quote instead of swallowing it and bleeding to end-of-document (the failure behind revert 45090c6). Nests via itself so inner comments stay bounded too.",
+			"begin": "\\[!\\]",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.comment.webdna"
+				}
+			},
+			"end": "(\\[\/!\\])|(?=\")",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.comment.webdna"
+				}
+			},
+			"name": "comment.block.webdna",
+			"patterns": [
+				{ "include": "#comments-html-double" }
+			]
+		},
+
+		"comments-html-single": {
+			"comment": "WebDNA [!]..[/!] comment, quote-bounded for single-quoted embedded-WebDNA attribute values; bounded by (?=') so it cannot bleed past the closing apostrophe.",
+			"begin": "\\[!\\]",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.comment.webdna"
+				}
+			},
+			"end": "(\\[\/!\\])|(?=')",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.comment.webdna"
+				}
+			},
+			"name": "comment.block.webdna",
+			"patterns": [
+				{ "include": "#comments-html-single" }
 			]
 		},
 
@@ -4378,6 +4463,27 @@
 							"name": "punctuation.definition.tag.end.webdna"
 						}
 					}
+				},
+				{
+					"comment": "WebDNA field reference with a nested subscript tag, e.g. [meetREPPINGCATS[index]] — the field name is immediately followed by a nested [..] tag before the closing ]. The (?=\\[) lookahead means this only fires for [name[.. and never for a flat [name] (which falls through to the generic rule below, unchanged). Nested tags are highlighted via #tags-valid (recurses, so [a[b[c]]] works); the rule ends at the field reference's own closing ].",
+					"begin": "(?i)(\\[)([^\\[\\]\\s]+)(?=\\[)",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.tag.begin.webdna"
+						},
+						"2": {
+							"name": "variable.webdna"
+						}
+					},
+					"end": "\\]",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.tag.end.webdna"
+						}
+					},
+					"patterns": [
+						{ "include": "#tags-valid" }
+					]
 				},
 				{
 					"begin": "(?i)(\\[)([^ ]*?)(?=\\])",
