@@ -1,5 +1,8 @@
 # WebDNA Language Extension for VSCode Changelog
 
+## (06/17/2026) v-0.1.4:
+- Highlight WebDNA tags used inside HTML element tags (e.g. `<option [showif [x]=[y]]selected[/showif]>`), which were previously mis-flagged by the HTML grammar as invalid attributes (italic/red). Implemented as a scoped injection limited to single-tag, bracket-balanced rules so it cannot bleed scope across the document.
+
 ## (06/17/2026) v-0.1.3:
 - Fixed a grammar injection that bled scope across the document, mis-colouring code after WebDNA blocks embedded in multi-line HTML attribute values.
 

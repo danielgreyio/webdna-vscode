@@ -10,6 +10,16 @@
 			"include": "text.html.derivative"
 		}
 	],
+	"injections": {
+		"L:meta.tag": {
+			"comment": "Highlight WebDNA tags used inside HTML element tags, e.g. <option [showif [x]=[y]]selected[/showif]>. Only single-tag, bracket-balanced rules (end=]) are injected: conditionals (showif/hideif/if/case/switch/else/then), database/generic tags, and support functions. Content-wrapping rules (#comments [!]..[/!], #storage [text]/[math]/[function], #contexts-valid, #sql, and the loop/flow wrappers like listwords/formvariables) are deliberately excluded — those span content and bled scope to end-of-document when injected (see prior revert in b1ec4e1/45090c6).",
+			"patterns": [
+				{ "include": "#keywords-conditional-valid" },
+				{ "include": "#tags-valid" },
+				{ "include": "#support" }
+			]
+		}
+	},
 	"repository": {
 		"webdna": {
 			"patterns": [
