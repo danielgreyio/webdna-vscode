@@ -1,0 +1,1 @@
+<input type="checkbox" name="_sPURPOSEID" id="check[sTID]" value="[sTID]" [showif |[meetPURPOSEID]|^|[sTID]|]checked[/showif] [showif [index]=1]data-fv-message="Please select at least one option"[/showif]>
