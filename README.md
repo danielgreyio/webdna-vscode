@@ -75,7 +75,7 @@ Syntax Highlighting for WebDNA consists of a few components that each tag has: t
 | GetChars              | ✓        | ✓        | ✓        |
 | GetCookie             | ✓        | ✓        | N/A      |
 | GetMIMEHeader         | ✓        | ✓        | N/A      |
-| Grep                  | ✗        | ✗        | ✗        |
+| Grep                  | ✓        | ✓        | ✓        |
 | Hide                  | ✗        | N/A      | ✗        |
 | HideIf                | ✓        | ✓        | ✓        |
 | HTML1                 | ✓        | N/A       | ✓        |
