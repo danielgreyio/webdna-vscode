@@ -1,0 +1,14 @@
+name: Update Changelog
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  update:
+    if: github.event.pull_request.merged == true
+    uses: deepworks-net/github.toolkit/.github/workflows/update-changelog.yml@v1
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
